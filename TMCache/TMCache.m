@@ -313,7 +313,7 @@ NSString * const TMCacheSharedName = @"TMCacheShared";
     return objectForKey;
 }
 
-- (void)setObject:(id <NSCoding>)object forKey:(NSString *)key
+- (void)setObject:(NSData*)object forKey:(NSString *)key
 {
     if (!object || !key)
         return;

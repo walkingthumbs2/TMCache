@@ -104,7 +104,7 @@ typedef void (^TMCacheObjectBlock)(TMCache *cache, NSString *key, id object);
  @param key A key to associate with the object. This string will be copied.
  @param block A block to be executed concurrently after the object has been stored, or nil.
  */
-- (void)setObject:(id <NSCoding>)object forKey:(NSString *)key block:(TMCacheObjectBlock)block;
+- (void)setObject:(NSData*)object forKey:(NSString *)key block:(TMCacheObjectBlock)block;
 
 /**
  Removes the object for the specified key. This method returns immediately and executes the passed
@@ -142,7 +142,7 @@ typedef void (^TMCacheObjectBlock)(TMCache *cache, NSString *key, id object);
  @param key The key associated with the object.
  @result The object for the specified key.
  */
-- (id)objectForKey:(NSString *)key;
+- (NSData*)objectForKey:(NSString *)key;
 
 /**
  Stores an object in the cache for the specified key. This method blocks the calling thread until the object has been set.

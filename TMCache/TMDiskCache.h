@@ -264,7 +264,7 @@ typedef void (^TMDiskCacheObjectBlock)(TMDiskCache *cache, NSString *key, id <NS
  @param key The key associated with the object.
  @result The object for the specified key.
  */
-- (id <NSCoding>)objectForKey:(NSString *)key;
+- (NSData *)objectForKey:(NSString *)key;
 
 /**
  Retrieves the file URL for the specified key. This method blocks the calling thread until the
@@ -285,7 +285,7 @@ typedef void (^TMDiskCacheObjectBlock)(TMDiskCache *cache, NSString *key, id <NS
  @param object An object to store in the cache.
  @param key A key to associate with the object. This string will be copied.
  */
-- (void)setObject:(id <NSCoding>)object forKey:(NSString *)key;
+- (void)setObject:(NSData*)object forKey:(NSString *)key;
 
 /**
  Removes the object for the specified key. This method blocks the calling thread until the object

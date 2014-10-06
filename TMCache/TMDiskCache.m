@@ -413,7 +413,7 @@ NSString * const TMDiskCacheSharedName = @"TMDiskCacheShared";
         id <NSCoding> object = nil;
 
         if ([[NSFileManager defaultManager] fileExistsAtPath:[fileURL path]]) {
-            object = [NSKeyedUnarchiver unarchiveObjectWithFile:[fileURL path]];
+            object = [NSData dataWithContentsOfFile:[fileURL path]];
             [strongSelf setFileModificationDate:now forURL:fileURL];
         }
 
@@ -447,7 +447,7 @@ NSString * const TMDiskCacheSharedName = @"TMDiskCacheShared";
     });
 }
 
-- (void)setObject:(id <NSCoding>)object forKey:(NSString *)key block:(TMDiskCacheObjectBlock)block
+- (void)setObject:(NSData*)object forKey:(NSString *)key block:(TMDiskCacheObjectBlock)block
 {
     NSDate *now = [[NSDate alloc] init];
 
@@ -470,7 +470,7 @@ NSString * const TMDiskCacheSharedName = @"TMDiskCacheShared";
         if (strongSelf->_willAddObjectBlock)
             strongSelf->_willAddObjectBlock(strongSelf, key, object, fileURL);
 
-        BOOL written = [NSKeyedArchiver archiveRootObject:object toFile:[fileURL path]];
+        BOOL written = [object writeToFile:[fileURL path ]atomically:YES];
 
         if (written) {
             [strongSelf setFileModificationDate:now forURL:fileURL];
